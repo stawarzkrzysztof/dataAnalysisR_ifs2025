@@ -1,0 +1,682 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={20250318HTML},
+  pdfauthor={Krzysztof Stawarz},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{20250318HTML}
+\author{Krzysztof Stawarz}
+\date{2025-03-25}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(knitr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  wczytaj dane kosmos, ale nie wyświetlaj tego kodu
+\end{enumerate}
+
+korzystając z dplyr:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  wybierz z bazy tylko respondentów z PL\\
+\item
+  wybierz z bazy tylko zmienne \texttt{sdg.imp} oraz \texttt{gender},
+  \texttt{age}, \texttt{edu.level} i \texttt{edu.field}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2178  129
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1] "StartDate"             "EndDate"               "Status"               
+##   [4] "Progress"              "Duration__in_seconds_" "Finished"             
+##   [7] "RecordedDate"          "ResponseId"            "DistributionChannel"  
+##  [10] "UserLanguage"          "consent"               "gender"               
+##  [13] "age"                   "edu.level"             "edu.field"            
+##  [16] "nationality"           "city"                  "political.1"          
+##  [19] "political.2"           "political.3"           "religiousity"         
+##  [22] "prior.1"               "prior.2"               "prior.3"              
+##  [25] "prior.4"               "prior.5"               "prior.6"              
+##  [28] "prior_6_1_TEXT"        "attitude.1"            "attitude.2"           
+##  [31] "value.1"               "value.2"               "value.3"              
+##  [34] "value.4"               "value.5"               "value.6"              
+##  [37] "value.7"               "value.8"               "value.9"              
+##  [40] "value.10"              "value.11"              "value.12"             
+##  [43] "att.check.five"        "expectancy.1"          "expectancy.2"         
+##  [46] "expectancy.3"          "expectancy.4"          "expectancy.5"         
+##  [49] "expectancy.6"          "expectancy.7"          "expectancy.8"         
+##  [52] "expectancy.9"          "expectancy.10"         "expectancy.11"        
+##  [55] "expectancy.12"         "conflict.1"            "conflict.2"           
+##  [58] "facilit.1"             "conflict.3"            "att.check.six"        
+##  [61] "conflict.4"            "facilit.2"             "facilit.3"            
+##  [64] "facilit.4"             "sdg.imp.1"             "sdg.imp.2"            
+##  [67] "sdg.imp.3"             "sdg.imp.4"             "sdg.imp.5"            
+##  [70] "sdg.imp.6"             "sdg.imp.7"             "sdg.imp.8"            
+##  [73] "sdg.imp.9"             "sdg.imp.10"            "sdg.imp.11"           
+##  [76] "sdg.imp.12"            "sdg.imp.13"            "sdg.imp.14"           
+##  [79] "sdg.imp.15"            "sdg.imp.16"            "sdg.import.1"         
+##  [82] "sdg.import.2"          "sdg.import.3"          "sdg.import.4"         
+##  [85] "sdg.import.5"          "sdg.import.6"          "sdg.import.7"         
+##  [88] "sdg.import.8"          "sdg.import.9"          "sdg.import.10"        
+##  [91] "sdg.import.11"         "sdg.import.12"         "sdg.import.13"        
+##  [94] "sdg.import.14"         "sdg.import.15"         "sdg.import.16"        
+##  [97] "support.1"             "support.2"             "support.3"            
+## [100] "support.4"             "support.5"             "support.6"            
+## [103] "support.7"             "prior.edu"             "engagement.1"         
+## [106] "engagement.2"          "engagement.3"          "engagement.4"         
+## [109] "engagement.5"          "engagement.6"          "engagement.7"         
+## [112] "engagement.8"          "engagement.9"          "engagement.10"        
+## [115] "engagement.11"         "cs.support"            "cs.engage.1"          
+## [118] "cs.engage.2"           "cs.engage.3"           "cs.engage.4"          
+## [121] "diversity.1"           "diversity.2"           "diversity.3"          
+## [124] "diversity.4"           "diversity.5"           "diversity.6"          
+## [127] "comments"              "id"                    "country"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{unique}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{UserLanguage) }\CommentTok{\# to kryterium wydaje się ok żeby oceniać skąd są badani}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "PL"    "EN-GB" "EN"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(UserLanguage }\SpecialCharTok{==} \StringTok{"PL"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(age, gender, edu.level, edu.field, }\FunctionTok{matches}\NormalTok{(}\StringTok{"\^{}sdg.imp}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d+$"}\NormalTok{))}
+
+\FunctionTok{dim}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1052   20
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "age"        "gender"     "edu.level"  "edu.field"  "sdg.imp.1" 
+##  [6] "sdg.imp.2"  "sdg.imp.3"  "sdg.imp.4"  "sdg.imp.5"  "sdg.imp.6" 
+## [11] "sdg.imp.7"  "sdg.imp.8"  "sdg.imp.9"  "sdg.imp.10" "sdg.imp.11"
+## [16] "sdg.imp.12" "sdg.imp.13" "sdg.imp.14" "sdg.imp.15" "sdg.imp.16"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{gender }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{gender, }
+                    \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{),}
+                    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"kobieta"}\NormalTok{, }\StringTok{"mężczyzna"}\NormalTok{, }\StringTok{"inna"}\NormalTok{, }\StringTok{"wolę nie odpowiadać"}\NormalTok{))}
+
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{edu.level }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{edu.level, }
+                       \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{),}
+                       \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"podstawowe"}\NormalTok{, }\StringTok{"średnie"}\NormalTok{, }\StringTok{"wyższe"}\NormalTok{))}
+
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{edu.field }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{edu.field, }
+                       \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{),}
+                       \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"humanistyczne lub społeczne"}\NormalTok{, }
+                                  \StringTok{"ścisłe lub techniczne"}\NormalTok{, }
+                                  \StringTok{"biologiczne lub medyczne"}\NormalTok{, }
+                                  \StringTok{"nie dotyczy"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  korzystając ze znanych Ci funkcji statystycznych wykonaj przynajmniej
+  3 analizy:
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  statystyki opisowej / statystyk opisowych (np. miary tendencji
+  centralnej, miary rozproszenia itp.)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       age                        gender         edu.level  
+##  Min.   :18.00   kobieta            :545   podstawowe: 51  
+##  1st Qu.:30.00   mężczyzna          :503   średnie   :592  
+##  Median :41.00   inna               :  1   wyższe    :409  
+##  Mean   :41.19   wolę nie odpowiadać:  3                   
+##  3rd Qu.:52.00                                             
+##  Max.   :66.00                                             
+##                        edu.field     sdg.imp.1       sdg.imp.2    
+##  humanistyczne lub społeczne:195   Min.   :1.000   Min.   :1.000  
+##  ścisłe lub techniczne      :296   1st Qu.:4.000   1st Qu.:4.000  
+##  biologiczne lub medyczne   : 60   Median :4.000   Median :4.000  
+##  nie dotyczy                :501   Mean   :4.629   Mean   :4.663  
+##                                    3rd Qu.:6.000   3rd Qu.:6.000  
+##                                    Max.   :7.000   Max.   :7.000  
+##    sdg.imp.3       sdg.imp.4       sdg.imp.5       sdg.imp.6      sdg.imp.7   
+##  Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   :1.00   Min.   :1.00  
+##  1st Qu.:4.000   1st Qu.:4.000   1st Qu.:4.000   1st Qu.:4.00   1st Qu.:4.00  
+##  Median :5.000   Median :5.000   Median :4.000   Median :5.00   Median :5.00  
+##  Mean   :4.925   Mean   :5.181   Mean   :4.711   Mean   :5.07   Mean   :5.33  
+##  3rd Qu.:7.000   3rd Qu.:7.000   3rd Qu.:6.000   3rd Qu.:7.00   3rd Qu.:7.00  
+##  Max.   :7.000   Max.   :7.000   Max.   :7.000   Max.   :7.00   Max.   :7.00  
+##    sdg.imp.8       sdg.imp.9      sdg.imp.10      sdg.imp.11      sdg.imp.12   
+##  Min.   :1.000   Min.   :1.00   Min.   :1.000   Min.   :1.000   Min.   :1.000  
+##  1st Qu.:4.000   1st Qu.:4.75   1st Qu.:4.000   1st Qu.:4.000   1st Qu.:4.000  
+##  Median :5.000   Median :6.00   Median :4.000   Median :5.000   Median :5.000  
+##  Mean   :5.171   Mean   :5.44   Mean   :4.606   Mean   :4.767   Mean   :4.761  
+##  3rd Qu.:7.000   3rd Qu.:7.00   3rd Qu.:6.000   3rd Qu.:6.000   3rd Qu.:6.000  
+##  Max.   :7.000   Max.   :7.00   Max.   :7.000   Max.   :7.000   Max.   :7.000  
+##    sdg.imp.13      sdg.imp.14      sdg.imp.15      sdg.imp.16   
+##  Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   :1.000  
+##  1st Qu.:4.000   1st Qu.:4.000   1st Qu.:4.000   1st Qu.:4.000  
+##  Median :5.000   Median :4.000   Median :5.000   Median :5.000  
+##  Mean   :5.188   Mean   :4.434   Mean   :5.038   Mean   :4.829  
+##  3rd Qu.:7.000   3rd Qu.:5.000   3rd Qu.:6.000   3rd Qu.:6.000  
+##  Max.   :7.000   Max.   :7.000   Max.   :7.000   Max.   :7.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_summary }\OtherTok{\textless{}{-}}\NormalTok{   df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}
+      \FunctionTok{where}\NormalTok{(is.numeric),  }
+      \FunctionTok{list}\NormalTok{(}
+        \AttributeTok{Min =}\NormalTok{ min, }
+        \AttributeTok{Q1 =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{quantile}\NormalTok{(., }\FloatTok{0.25}\NormalTok{), }
+        \AttributeTok{Median =}\NormalTok{ median, }
+        \AttributeTok{Q3 =} \SpecialCharTok{\textasciitilde{}}\FunctionTok{quantile}\NormalTok{(., }\FloatTok{0.75}\NormalTok{), }
+        \AttributeTok{Max =}\NormalTok{ max, }
+        \AttributeTok{Mean =}\NormalTok{ mean, }
+        \AttributeTok{SD =}\NormalTok{ sd,}
+        \AttributeTok{Mode =}\NormalTok{ DescTools}\SpecialCharTok{::}\NormalTok{Mode}
+\NormalTok{      ),}
+      \AttributeTok{.names =} \StringTok{"\{.col\}\_\{.fn\}"}  
+\NormalTok{    )) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{pivot\_longer}\NormalTok{(}\FunctionTok{everything}\NormalTok{(), }
+                 \AttributeTok{names\_to =} \FunctionTok{c}\NormalTok{(}\StringTok{"Variable"}\NormalTok{, }\StringTok{"Statistic"}\NormalTok{), }
+                 \AttributeTok{names\_sep =} \StringTok{"\_"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{pivot\_wider}\NormalTok{(}\AttributeTok{names\_from =}\NormalTok{ Statistic, }\AttributeTok{values\_from =}\NormalTok{ value)}
+\FunctionTok{kable}\NormalTok{(df\_summary, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{, }\AttributeTok{caption =} \StringTok{"Summary Statistics Table"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lrrrrrrrr@{}}
+\caption{Summary Statistics Table}\tabularnewline
+\toprule\noalign{}
+Variable & Min & Q1 & Median & Q3 & Max & Mean & SD & Mode \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Variable & Min & Q1 & Median & Q3 & Max & Mean & SD & Mode \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+age & 18 & 30.00 & 41 & 52 & 66 & 41.19 & 12.91 & 43 \\
+sdg.imp.1 & 1 & 4.00 & 4 & 6 & 7 & 4.63 & 1.75 & 4 \\
+sdg.imp.2 & 1 & 4.00 & 4 & 6 & 7 & 4.66 & 1.78 & 4 \\
+sdg.imp.3 & 1 & 4.00 & 5 & 7 & 7 & 4.92 & 1.66 & 4 \\
+sdg.imp.4 & 1 & 4.00 & 5 & 7 & 7 & 5.18 & 1.52 & 7 \\
+sdg.imp.5 & 1 & 4.00 & 4 & 6 & 7 & 4.71 & 1.68 & 4 \\
+sdg.imp.6 & 1 & 4.00 & 5 & 7 & 7 & 5.07 & 1.64 & 7 \\
+sdg.imp.7 & 1 & 4.00 & 5 & 7 & 7 & 5.33 & 1.50 & 7 \\
+sdg.imp.8 & 1 & 4.00 & 5 & 7 & 7 & 5.17 & 1.52 & 7 \\
+sdg.imp.9 & 1 & 4.75 & 6 & 7 & 7 & 5.44 & 1.44 & 7 \\
+sdg.imp.10 & 1 & 4.00 & 4 & 6 & 7 & 4.61 & 1.67 & 4 \\
+sdg.imp.11 & 1 & 4.00 & 5 & 6 & 7 & 4.77 & 1.62 & 4 \\
+sdg.imp.12 & 1 & 4.00 & 5 & 6 & 7 & 4.76 & 1.65 & 4 \\
+sdg.imp.13 & 1 & 4.00 & 5 & 7 & 7 & 5.19 & 1.58 & 7 \\
+sdg.imp.14 & 1 & 4.00 & 4 & 5 & 7 & 4.43 & 1.60 & 4 \\
+sdg.imp.15 & 1 & 4.00 & 5 & 6 & 7 & 5.04 & 1.53 & 4 \\
+sdg.imp.16 & 1 & 4.00 & 5 & 6 & 7 & 4.83 & 1.67 & 4 \\
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(df) }\SpecialCharTok{+}
+  \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ age) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth=}\DecValTok{10}\NormalTok{, }\AttributeTok{color =} \StringTok{"white"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightgrey"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{15}\NormalTok{, }\DecValTok{75}\NormalTok{, }\AttributeTok{by =} \DecValTok{10}\NormalTok{), }\AttributeTok{lim =} \FunctionTok{c}\NormalTok{(}\DecValTok{15}\NormalTok{, }\DecValTok{75}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\AttributeTok{stat =} \StringTok{"bin"}\NormalTok{, }\AttributeTok{binwidth =} \DecValTok{10}\NormalTok{, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{after\_stat}\NormalTok{(count)), }\AttributeTok{vjust =} \SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"age (numerical histogram)"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }\AttributeTok{hjust =}\NormalTok{ .}\DecValTok{5}\NormalTok{),}
+    \AttributeTok{axis.title =} \FunctionTok{element\_blank}\NormalTok{()}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{20250318HTML_files/figure-latex/unnamed-chunk-8-1.pdf}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{20250318HTML_files/figure-latex/unnamed-chunk-9-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{create\_barplot }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(data, column, size)\{}
+\NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(data) }\SpecialCharTok{+}
+  \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ .data[[column]]) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{color =} \StringTok{"white"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightgrey"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{after\_stat}\NormalTok{(count)), }\AttributeTok{stat =} \StringTok{"count"}\NormalTok{, }\AttributeTok{vjust =} \SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{, }\AttributeTok{size =}\NormalTok{ size) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(column) }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{, }\AttributeTok{hjust =}\NormalTok{ .}\DecValTok{5}\NormalTok{),}
+    \AttributeTok{axis.title =} \FunctionTok{element\_blank}\NormalTok{()}
+\NormalTok{  )}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{create\_barplot}\NormalTok{(df, }\StringTok{"gender"}\NormalTok{, }\DecValTok{4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{20250318HTML_files/figure-latex/unnamed-chunk-11-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{create\_barplot}\NormalTok{(df, }\StringTok{"edu.level"}\NormalTok{, }\DecValTok{4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{20250318HTML_files/figure-latex/unnamed-chunk-11-2.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{create\_barplot}\NormalTok{(df, }\StringTok{"edu.field"}\NormalTok{, }\DecValTok{4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{20250318HTML_files/figure-latex/unnamed-chunk-11-3.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plots }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{16}\NormalTok{)\{}
+\NormalTok{  col }\OtherTok{=}\NormalTok{ glue}\SpecialCharTok{::}\FunctionTok{glue}\NormalTok{(}\StringTok{"sdg.imp.\{i\}"}\NormalTok{)}
+\NormalTok{  plots[[i]] }\OtherTok{\textless{}{-}} \FunctionTok{create\_barplot}\NormalTok{(df, col, }\DecValTok{2}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{7}\NormalTok{, }\AttributeTok{by =} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+    \FunctionTok{ylim}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{400}\NormalTok{) }\SpecialCharTok{+} 
+    \FunctionTok{theme}\NormalTok{(}
+      \AttributeTok{axis.text.y =} \FunctionTok{element\_blank}\NormalTok{(), }
+      \AttributeTok{panel.grid =} \FunctionTok{element\_line}\NormalTok{(}\AttributeTok{linewidth=}\NormalTok{.}\DecValTok{35}\NormalTok{), }
+      \AttributeTok{panel.grid.major.y =} \FunctionTok{element\_blank}\NormalTok{(),}
+      \AttributeTok{panel.grid.minor =} \FunctionTok{element\_blank}\NormalTok{())}
+\NormalTok{\}}
+
+\NormalTok{gridExtra}\SpecialCharTok{::}\FunctionTok{grid.arrange}\NormalTok{(}
+  \AttributeTok{grobs =}\NormalTok{ plots,}
+  \AttributeTok{nrow =} \DecValTok{4}\NormalTok{,}
+  \AttributeTok{ncol =} \DecValTok{4}\NormalTok{,}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{20250318HTML_files/figure-latex/unnamed-chunk-13-1.pdf}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  różnic średnich w grupach (np. test T
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%} 
+  \CommentTok{\# z gory przepraszam osoby niebinarne}
+  \FunctionTok{filter}\NormalTok{(gender }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"kobieta"}\NormalTok{, }\StringTok{"mężczyzna"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# troche bez sensu ta analiza bo nie mam pojecia czym sa te zmienne sdg.imp.3}
+\CommentTok{\# wiec jak mam wyciagac jakies wnioski albo szukac polaczen/zaleznosci}
+\FunctionTok{t.test}\NormalTok{(age }\SpecialCharTok{\textasciitilde{}}\NormalTok{ gender, }\AttributeTok{data =}\NormalTok{ df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Welch Two Sample t-test
+## 
+## data:  age by gender
+## t = -1.5547, df = 1038.1, p-value = 0.1203
+## alternative hypothesis: true difference in means between group kobieta and group mężczyzna is not equal to 0
+## 95 percent confidence interval:
+##  -2.8058853  0.3251951
+## sample estimates:
+##   mean in group kobieta mean in group mężczyzna 
+##                40.61651                41.85686
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(sdg.imp}\FloatTok{.3} \SpecialCharTok{\textasciitilde{}}\NormalTok{ gender, }\AttributeTok{data =}\NormalTok{ df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Welch Two Sample t-test
+## 
+## data:  sdg.imp.3 by gender
+## t = 0.0030996, df = 1042.3, p-value = 0.9975
+## alternative hypothesis: true difference in means between group kobieta and group mężczyzna is not equal to 0
+## 95 percent confidence interval:
+##  -0.2005897  0.2012244
+## sample estimates:
+##   mean in group kobieta mean in group mężczyzna 
+##                4.924771                4.924453
+\end{verbatim}
+
+ANOVA)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{anova\_result }\OtherTok{\textless{}{-}} \FunctionTok{aov}\NormalTok{(sdg.imp}\FloatTok{.3} \SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ df)}
+\FunctionTok{summary}\NormalTok{(anova\_result)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##               Df Sum Sq Mean Sq  F value   Pr(>F)    
+## age            1    7.1     7.1   12.268 0.000481 ***
+## gender         1    0.0     0.0    0.026 0.871605    
+## edu.level      2    2.3     1.1    1.972 0.139742    
+## edu.field      3    2.1     0.7    1.198 0.309309    
+## sdg.imp.1      1 1761.7  1761.7 3042.556  < 2e-16 ***
+## sdg.imp.2      1  230.0   230.0  397.300  < 2e-16 ***
+## sdg.imp.4      1  189.2   189.2  326.728  < 2e-16 ***
+## sdg.imp.5      1   11.8    11.8   20.359 7.16e-06 ***
+## sdg.imp.6      1   49.6    49.6   85.668  < 2e-16 ***
+## sdg.imp.7      1    2.6     2.6    4.574 0.032688 *  
+## sdg.imp.8      1    1.3     1.3    2.223 0.136237    
+## sdg.imp.9      1    5.3     5.3    9.132 0.002574 ** 
+## sdg.imp.10     1    4.4     4.4    7.628 0.005849 ** 
+## sdg.imp.11     1    1.5     1.5    2.675 0.102217    
+## sdg.imp.12     1    1.0     1.0    1.664 0.197408    
+## sdg.imp.13     1    0.0     0.0    0.007 0.935097    
+## sdg.imp.14     1    0.7     0.7    1.171 0.279395    
+## sdg.imp.15     1    8.4     8.4   14.507 0.000148 ***
+## sdg.imp.16     1    0.5     0.5    0.852 0.356291    
+## Residuals   1025  593.5     0.6                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+bądź korelacji
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_numeric }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\FunctionTok{where}\NormalTok{(is.numeric))}
+  \CommentTok{\# select(!age)}
+
+\NormalTok{df\_melted }\OtherTok{\textless{}{-}}\NormalTok{ reshape2}\SpecialCharTok{::}\FunctionTok{melt}\NormalTok{(}\FunctionTok{cor}\NormalTok{(df\_numeric), }\AttributeTok{value.name =} \StringTok{"correlation"}\NormalTok{)}
+\FunctionTok{ggplot}\NormalTok{(df\_melted) }\SpecialCharTok{+}
+  \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Var1, }\AttributeTok{y =}\NormalTok{ Var2, }\AttributeTok{fill =}\NormalTok{ correlation) }\SpecialCharTok{+}
+  \FunctionTok{geom\_tile}\NormalTok{(}\AttributeTok{color =} \StringTok{"white"}\NormalTok{,}
+            \AttributeTok{lwd =} \FloatTok{1.25}\NormalTok{,}
+            \AttributeTok{linetype =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_fixed}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{round}\NormalTok{(correlation, }\DecValTok{2}\NormalTok{)), }\AttributeTok{size =} \DecValTok{2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{scale\_fill\_gradient2}\NormalTok{(}\AttributeTok{low =} \StringTok{"steelblue"}\NormalTok{, }\AttributeTok{mid =} \StringTok{"white"}\NormalTok{, }\AttributeTok{high =} \StringTok{"tomato"}\NormalTok{,}
+                       \AttributeTok{midpoint =} \DecValTok{0}\NormalTok{, }\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{axis.title =} \FunctionTok{element\_blank}\NormalTok{(),}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle=}\DecValTok{90}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{20250318HTML_files/figure-latex/unnamed-chunk-17-1.pdf}}
+
+bądź regresji liniowej 2 (max 3) zmiennych
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{lm}\NormalTok{(sdg.imp}\FloatTok{.3} \SpecialCharTok{\textasciitilde{}}\NormalTok{ age, }\AttributeTok{data =}\NormalTok{ df))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = sdg.imp.3 ~ age, data = df)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.0472 -0.9722  0.0581  1.9273  2.2208 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  5.187586   0.171134   30.31   <2e-16 ***
+## age         -0.006381   0.003963   -1.61    0.108    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.655 on 1046 degrees of freedom
+## Multiple R-squared:  0.002473,   Adjusted R-squared:  0.001519 
+## F-statistic: 2.593 on 1 and 1046 DF,  p-value: 0.1077
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  zależności w formie wykresu rozrzutu
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(df) }\SpecialCharTok{+} 
+  \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ sdg.imp}\FloatTok{.3}\NormalTok{, }\AttributeTok{y =}\NormalTok{ age) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{20250318HTML_files/figure-latex/unnamed-chunk-19-1.pdf}}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{4}
+\item
+  zapisz w raporcie rmarkdown interpretację analityczną wyników
+  (komentarz analityczny)
+\item
+  użyj odpowiedniego formatowania:
+\end{enumerate}
+
+\begin{itemize}
+\item
+  nagłówki 2 lub 3 stopnia dla 3 analiz
+\item
+  przywoływane w interpretacji nazwy zmiennych wyróżnione opcją
+  \texttt{verbatim} lub kursywą
+\item
+  przywoływane w interpretacji wartości liczbowe pogrubione
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  po skończonej pracy wyniki umieść w katalogu z zajęć nr 3 na Teams
+\end{enumerate}
+
+POZIOMY ZMIENNYCH:
+
+\texttt{gender}: 1) kobieta 2) mężczyzna 3) inna 4) wolę nie odpowiadać
+
+\texttt{edu.level} (PL): 1) podstawowe 2) średnie 3) wyższe
+
+\texttt{edu.field} (wykształcenie kierunkowe): 1) humanistyczne lub
+społeczne 2) ścisłe lub techniczne 3) biologiczne lub medyczne 4) nie
+dotyczy
+
+\end{document}
